@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Modal</title>
+    <style>
+
+.modal {
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: grey;
+}
+
+#openModalBtn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  background-color: #eb4a10;
+  color: white;
+}
+.container {
+  background-color: #f7ccf0;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.header p {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #aaa;
+}
+
+.close-modal:hover {
+  color: black;
+  text-decoration: none;
+  outline: none;
+}
+
+/* Modal Body */
+.modal-body {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  margin-top: 20px;
+}
+
+.modal-footer button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal-footer .close-btn {
+  background-color: #57b8bb;
+  color: white;
+}
+
+.modal-footer .save-change-btn {
+  background-color: #f71e25;
+  color: white;
+}
+
+.modal-footer button:hover {
+  opacity: 0.8;
+}
+    </style>
+  </head>
+  <body>
+    <button id="openModalBtn">Open Modal</button>
+    <div class="modal">
+      <div class="container">
+        <div class="header">
+          <p>TITILE OF MODAL</p>
+          <button type="button" class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>This is the text written in the modal</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="close-btn">CLose</button>
+          <button type="button" class="save-change-btn">Save Change</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        var modal = document.querySelector(".modal");
+
+var openModalBtn = document.getElementById("openModalBtn");
+var closeModalBtn = document.querySelector(".close-modal");
+
+var closeFooterBtn = document.querySelector(".modal-footer button:first-child");
+var saveFooterBtn = document.querySelector(".modal-footer button:last-child");
+
+openModalBtn.onclick = function () {
+  modal.style.display = "block";
+};
+
+closeModalBtn.onclick = function () {
+  modal.style.display = "none";
+};
+
+closeFooterBtn.onclick = function () {
+  modal.style.display = "none";
+};
+
+saveFooterBtn.onclick = function () {
+  alert("Changes have been saved!");
+  modal.style.display = "none";
+};
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+    </script>
+  </body>
+</html>

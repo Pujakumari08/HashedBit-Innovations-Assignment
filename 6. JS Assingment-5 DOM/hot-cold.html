@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hot or Cold Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 300px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .form-group button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .form-group button:hover {
+      background-color: #0056b3;
+    }
+    .message {
+      font-size: 1.2em;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hot or Cold Game</h1>
+    <div class="form-group">
+      <input type="number" id="guessInput" placeholder="Enter your guess (1-100)" min="1" max="100">
+      <button onclick="makeGuess()">Submit Guess</button>
+    </div>
+    <div id="message" class="message"></div>
+  </div>
+
+  <script>
+    let secretNumber = Math.floor(Math.random() * 100) + 1;
+    let previousGuess = null;
+
+    function makeGuess() {
+      const guessInput = document.getElementById('guessInput');
+      const message = document.getElementById('message');
+      const guess = parseInt(guessInput.value);
+
+      if (isNaN(guess) || guess < 1 || guess > 100) {
+        message.textContent = 'Please enter a valid number between 1 and 100.';
+        return;
+      }
+
+      if (guess === secretNumber) {
+        message.textContent = 'Congratulations! You guessed the number!';
+        message.style.color = 'green';
+        return;
+      }
+
+      if (previousGuess !== null) {
+        if (Math.abs(secretNumber - guess) < Math.abs(secretNumber - previousGuess)) {
+          message.textContent = 'Hotter!';
+          message.style.color = 'red';
+        } else {
+          message.textContent = 'Colder!';
+          message.style.color = 'blue';
+        }
+      } else {
+        message.textContent = 'Try again!';
+      }
+
+      previousGuess = guess;
+      guessInput.value = '';
+      guessInput.focus();
+    }
+  </script>
+</body>
+</html>
